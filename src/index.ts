@@ -1,4 +1,5 @@
 import express, { Request, Response, Application } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
@@ -17,8 +18,8 @@ app.get('/api/health', (req: Request, res: Response) => {
 
 app.get('/api/users', (req: Request, res: Response) => {
   const users = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+    { id: '1', name: 'John Doe', email: 'john@example.com' },
+    { id: '2', name: 'Jane Smith', email: 'jane@example.com' }
   ];
   res.json({ users });
 });
@@ -32,7 +33,7 @@ app.post('/api/users', (req: Request, res: Response) => {
   }
   
   const newUser = {
-    id: Math.floor(Math.random() * 1000),
+    id: uuidv4(),
     name,
     email
   };
